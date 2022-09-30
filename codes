@@ -1,0 +1,26 @@
+import os
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+from PIL import Image
+from tensorflow.keras.metrics import MeanIoU
+
+
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
+mscaler = MinMaxScaler()
+sscaler = StandardScaler()
+
+
+import pathlib
+directory = pathlib.Path('/content')
+image_dataset=[]
+for path, subdirs, files in os.walk(directory):
+  dirname = path.split(os.path.sep)[-1]
+  if dirname == 'train_images':
+    train_images = os.listdir(path)
+    for i, image_name in enumerate(train_images):
+      #print(image_name)
+      if image_name.endswith(".jpg"):
+        image = cv.imread(path+"/"+image_name, 1)
+        image = image.formarray(image)
+        image=np.array(image)
